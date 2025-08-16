@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Usage: stack-jump <index>
+target_index=$1
+
+# Find window id by stack index in current space
+win_id=$(yabai -m query --windows --space | jq --arg idx "$target_index" '.[] | select(."stack-index" == ($idx | tonumber)) | .id')
+
+if [[ -n $win_id ]]; then
+    yabai -m window --focus "$win_id"
+fi

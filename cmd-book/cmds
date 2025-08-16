@@ -1,0 +1,2 @@
+neovim
+:lua print(vim.inspect(vim.lsp.get_active_clients({ name = "gopls" })[1].config))

@@ -1,0 +1,12 @@
+
+# shift + alt - 1 : yabai -m window --focus stack.first
+shift + alt - v : yabai -m window --focus stack.next
+shift + alt - c : yabai -m window --focus stack.prev
+
+shift + alt - 1 : $HOME/.local/scripts/stack-jump 1
+shift + alt - 2 : $HOME/.local/scripts/stack-jump 2
+shift + alt - 3 : $HOME/.local/scripts/stack-jump 3
+shift + alt - 4 : $HOME/.local/scripts/stack-jump 4
+shift + alt - 5 : $HOME/.local/scripts/stack-jump 5
+
+
