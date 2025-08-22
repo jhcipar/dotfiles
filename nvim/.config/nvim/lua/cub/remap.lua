@@ -33,6 +33,7 @@ vim.keymap.set("n", "<leader>i", function()
     vim.lsp.buf.code_action({ context = { only = { "source.organizeImports" } }, apply = true })
 end)
 vim.keymap.set('i', '<c-s>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+vim.keymap.set('n', '<c-s>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
 
 vim.keymap.set("n", "gd", function()
     vim.lsp.buf.definition()

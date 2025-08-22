@@ -110,3 +110,5 @@ fi
 
 [[ -f ~/.aliases ]] && source ~/.aliases
 [[ -f ~/.functions ]] && source ~/.functions
+
+. "$HOME/.local/bin/env"
