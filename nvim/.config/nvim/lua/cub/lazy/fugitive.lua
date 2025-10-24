@@ -3,6 +3,10 @@ return {
     config = function() 
         vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
 
+        vim.keymap.set("n", "<leader>gd", function()
+            vim.cmd("Gvdiffsplit origin/main")
+        end, { desc = "Fugitive: diff vs origin/main" })
+
         local fugitive_augroup = vim.api.nvim_create_augroup("fugitive_augroup", {})
 
         local autocmd = vim.api.nvim_create_autocmd

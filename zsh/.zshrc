@@ -112,3 +112,9 @@ fi
 [[ -f ~/.functions ]] && source ~/.functions
 
 . "$HOME/.local/bin/env"
+. "$HOME/dotfiles/.env"
+
+
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+

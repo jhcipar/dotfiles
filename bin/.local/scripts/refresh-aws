@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+PROFILE="dev"
+OUTPUT_PROFILE="default"
+
+# Make sure you’ve logged in first
+# aws sso login --profile "$PROFILE"
+
+# Grab creds from the profile
+CREDS=$(aws sts get-caller-identity --profile "$PROFILE" >/dev/null 2>&1 && \
+        aws configure export-credentials --profile "$PROFILE")
+
+AWS_ACCESS_KEY_ID=$(echo "$CREDS" | jq -r '.AccessKeyId')
+AWS_SECRET_ACCESS_KEY=$(echo "$CREDS" | jq -r '.SecretAccessKey')
+AWS_SESSION_TOKEN=$(echo "$CREDS" | jq -r '.SessionToken')
+
+# Write them to ~/.aws/credentials
+aws configure set aws_access_key_id     "$AWS_ACCESS_KEY_ID"     --profile "$OUTPUT_PROFILE"
+aws configure set aws_secret_access_key "$AWS_SECRET_ACCESS_KEY" --profile "$OUTPUT_PROFILE"
+aws configure set aws_session_token     "$AWS_SESSION_TOKEN"     --profile "$OUTPUT_PROFILE"
+
+echo "✅ Exported SSO creds for profile '$PROFILE' into ~/.aws/credentials under [$OUTPUT_PROFILE]"

@@ -35,12 +35,20 @@ end)
 vim.keymap.set('i', '<c-s>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
 vim.keymap.set('n', '<c-s>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
 
-vim.keymap.set("n", "gd", function()
-    vim.lsp.buf.definition()
-end)
+-- vim.keymap.set("n", "gd", function()
+--     vim.lsp.buf.definition()
+-- end)
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+
+vim.keymap.set("n", "<leader>td", function()
+    vim.cmd("edit ~/TODO.md")
+end)
+
+vim.keymap.set("n", "<leader>tp", function()
+    vim.cmd("edit ~/SCRATCHPAD.md")
+end)
 
 vim.keymap.set(
     "n",
