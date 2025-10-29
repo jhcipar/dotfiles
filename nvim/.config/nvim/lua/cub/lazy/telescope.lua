@@ -32,7 +32,7 @@ return {
         vim.keymap.set('n', '<leader>pr', function()
             builtin.grep_string({ 
                 search = vim.fn.input("Regex Grep > "),
-                use_regex = true 
+                use_regex = true
             })
         end)
 

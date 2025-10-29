@@ -1,12 +1,15 @@
-
-# shift + alt - 1 : yabai -m window --focus stack.first
-shift + alt - v : yabai -m window --focus stack.next
-shift + alt - c : yabai -m window --focus stack.prev
-
-shift + alt - 1 : $HOME/.local/scripts/stack-jump 1
-shift + alt - 2 : $HOME/.local/scripts/stack-jump 2
-shift + alt - 3 : $HOME/.local/scripts/stack-jump 3
-shift + alt - 4 : $HOME/.local/scripts/stack-jump 4
-shift + alt - 5 : $HOME/.local/scripts/stack-jump 5
-
+# # don't forget you can do yabai -m query --windows to get window info
+# shift + alt - j : yabai -m window --swap prev
+# # rotate stack backward
+# # shift + alt - k : yabai -m window --stack west
+# # shift + alt - 1 : yabai -m window --focus stack.first
+# shift + alt - v : yabai -m window --focus stack.next
+# shift + alt - c : yabai -m window --focus stack.prev
+#
+# shift + alt - 1 : $HOME/.local/scripts/stack-jump 1
+# shift + alt - 2 : $HOME/.local/scripts/stack-jump 2
+# shift + alt - 3 : $HOME/.local/scripts/stack-jump 3
+# shift + alt - 4 : $HOME/.local/scripts/stack-jump 4
+# shift + alt - 5 : $HOME/.local/scripts/stack-jump 5
+#
 
