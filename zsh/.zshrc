@@ -111,6 +111,7 @@ fi
 [[ -f ~/.aliases ]] && source ~/.aliases
 [[ -f ~/.functions ]] && source ~/.functions
 
+source $HOME/dotfiles/secrets.env
 . "$HOME/.local/bin/env"
 . "$HOME/dotfiles/.env"
 
