@@ -15,6 +15,6 @@ require("lazy").setup({
   rocks = {
     enabled = false,
   },
-    spec = "cub.lazy",
+    spec = "cub.custom.plugins",
     change_detection = { notify = false }
 })

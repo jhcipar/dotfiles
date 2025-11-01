@@ -1,3 +1,8 @@
+vim.opt.inccommand = "split"
+
+vim.opt.smartcase = true
+vim.opt.ignorecase = true
+
 vim.opt.guicursor = ""
 
 vim.opt.nu = true

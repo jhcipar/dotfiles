@@ -1,6 +1,5 @@
 require("cub.autocmds")
-require("cub.export_keymaps")
-require("cub.set")
-require("cub.remap")
+require("cub.options")
+require("cub.keymaps")
 require("cub.lazy_init")
 
