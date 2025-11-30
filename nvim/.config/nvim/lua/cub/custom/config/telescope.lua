@@ -24,7 +24,19 @@ pcall(require("telescope").load_extension, "ui-select")
 
 local builtin = require "telescope.builtin"
 
-require('telescope').setup({ })
+-- require('telescope').setup({ })
+require('telescope').setup({
+    defaults = {
+        mappings = {
+            i = {
+                ["<C-q>"] = require('telescope.actions').smart_send_to_qflist + require('telescope.actions').open_qflist,
+            },
+            n = {
+                ["<C-q>"] = require('telescope.actions').smart_send_to_qflist + require('telescope.actions').open_qflist,
+            },
+        },
+    },
+})
 
 vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
 vim.keymap.set('n', '<leader>pF', builtin.oldfiles, {})

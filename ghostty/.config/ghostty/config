@@ -1,0 +1,6 @@
+theme = Rose Pine
+# font-family = Monaco
+# font-family = monospace
+font-family = "JetBrains Mono"
+font-thicken = true
+cursor-style-blink = false
