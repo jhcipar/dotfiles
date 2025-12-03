@@ -46,6 +46,12 @@ vim.keymap.set('n', '<leader>pws', function()
     builtin.grep_string({ search = word })
 end)
 
+-- should probably be on attach to lsp, but whatever
+vim.keymap.set('n', '<leader>pu', builtin.lsp_dynamic_workspace_symbols, {})
+vim.keymap.set('n', '<leader>pt', function()
+    builtin.lsp_document_symbols(require('telescope.themes').get_ivy())
+end)
+
 vim.keymap.set('n', '<leader>pWs', function()
     local word = vim.fn.expand("<cWORD>")
     builtin.grep_string({ search = word })
