@@ -105,3 +105,7 @@ automatically-unhide-macos-hidden-apps = false
     down = 'volume down'
     up = 'volume up'
     shift-down = ['volume set 0', 'mode main']
+
+[[on-window-detected]]
+    if.app-id = 'com.tinyapp.TablePlus'
+    run = ['layout floating', 'move-node-to-workspace 4']

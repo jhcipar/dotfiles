@@ -40,3 +40,7 @@ return {
         vim.keymap.set("n", "gh", "<cmd>diffget //3<CR>")
     end
 }
+
+-- neato commands
+-- :Git difftool --name-only <branch-name>
+-- adds all diffed files to qflist

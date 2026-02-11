@@ -85,6 +85,49 @@ return {
                             }
                         }
                     end,
+                    ["vtsls"] = function()
+                        require("lspconfig").vtsls.setup({
+                            capabilities = capabilities,
+                            settings = {
+                                vtsls = {
+                                    autoUseWorkspaceTsdk = true,
+                                    tsserver = {
+                                        -- disable global plugins first while debugging crashes
+                                        -- globalPlugins = {},
+                                    },
+                                    experimental = {
+                                        completion = {
+                                            enableServerSideFuzzyMatch = true,
+                                            entriesLimit = 100,
+                                        },
+                                    },
+                                },
+                                typescript = {
+                                    tsserver = {
+                                        maxTsServerMemory = 8192,
+                                        pluginPaths = { "./node_modules" },
+                                    },
+                                    preferences = {
+                                        includePackageJsonAutoImports = "off",
+                                        autoImportFileExcludePatterns = {
+                                            "**/node_modules/**",
+                                            "**/dist/**",
+                                            "**/build/**",
+                                            "**/.next/**",
+                                        },
+                                    },
+                                },
+                                javascript = {
+                                    tsserver = {
+                                        maxTsServerMemory = 8192,
+                                    },
+                                    preferences = {
+                                        includePackageJsonAutoImports = "off",
+                                    },
+                                },
+                            },
+                        })
+                    end,
                 }
             })
 

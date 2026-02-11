@@ -1,0 +1,7 @@
+tmux rename-window -t 1 "nvim"
+tmux send-keys -t 1 "nvim ." C-m
+
+tmux new-window -t 2 -n "scratch"
+
+tmux new-window -t 3 -n "terminal"
+tmux new-window -t 4 -n "opencode"

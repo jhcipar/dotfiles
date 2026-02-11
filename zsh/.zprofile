@@ -4,3 +4,6 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 export PATH="$HOME/.local/scripts:$PATH"
 export PATH="$HOME/go/bin/:$PATH"
+
+# opencode
+export PATH=/Users/jacobcipar/.opencode/bin:$PATH

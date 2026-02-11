@@ -24,6 +24,10 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+-- not sure if these work
+vim.keymap.set("n", "<C-m>", "<cmd>cnext<CR>zz", { desc = "prev quickfix item" })     -- next quickfix item
+vim.keymap.set("n", "<C-n>", "<cmd>cprev<CR>zz", { desc = "next quickfix item" })     -- previous quickfix item
+
 -- vim.keymap.set("n", "<M-h>", "<cmd>silent !tmux-sessionizer -s 0 --vsplit<CR>")
 -- vim.keymap.set("n", "<M-H>", "<cmd>silent !tmux neww tmux-sessionizer -s 0<CR>")
 vim.keymap.set("n", "<leader>f", function()
