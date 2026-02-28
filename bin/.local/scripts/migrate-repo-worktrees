@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+# mirate-repo-worktrees
+# Usage: ./mirate-repo-worktrees /path/to/existing-repo
+# Or run from inside the repo: ./migrate-to-bare-worktree.sh .
+
+set -euo pipefail
+
+# ── helpers ──────────────────────────────────────────────────────────────────
+die()  { echo "❌ $*" >&2; exit 1; }
+info() { echo "→  $*"; }
+
+# ── resolve the repo path ─────────────────────────────────────────────────────
+REPO_PATH="${1:-.}"
+REPO_PATH="$(cd "$REPO_PATH" && pwd)"  # absolute path
+
+[[ -d "$REPO_PATH/.git" ]] || die "No .git found in $REPO_PATH — is this a git repo?"
+
+REPO_NAME="$(basename "$REPO_PATH")"
+PARENT="$(dirname "$REPO_PATH")"
+OLD_PATH="$PARENT/${REPO_NAME}-old"
+NEW_PATH="$PARENT/$REPO_NAME-worktrees"
+
+# ── confirm before doing anything ─────────────────────────────────────────────
+echo ""
+echo "  Repo:       $REPO_PATH"
+echo "  Rename to:  $OLD_PATH"
+echo "  New setup:  $NEW_PATH"
+echo ""
+read -rp "Proceed? [y/N] " confirm
+[[ "$confirm" =~ ^[Yy]$ ]] || { echo "Aborted."; exit 0; }
+
+# ── get remote URL from existing repo ────────────────────────────────────────
+REMOTE_URL="$(git -C "$REPO_PATH" remote get-url origin 2>/dev/null)" \
+  || die "Couldn't get remote URL — does origin exist?"
+info "Remote: $REMOTE_URL"
+
+# ── get the current branch name to check out as first worktree ───────────────
+MAIN_BRANCH="$(git -C "$REPO_PATH" symbolic-ref --short HEAD 2>/dev/null || echo "main")"
+info "Default branch: $MAIN_BRANCH"
+
+# ── rename old repo ───────────────────────────────────────────────────────────
+info "Renaming $REPO_NAME → ${REPO_NAME}-old"
+mv "$REPO_PATH" "$OLD_PATH"
+
+# ── set up bare repo ──────────────────────────────────────────────────────────
+info "Creating new workspace at $NEW_PATH"
+mkdir -p "$NEW_PATH"
+
+info "Cloning bare repo..."
+git clone --bare "$REMOTE_URL" "$NEW_PATH/.bare"
+
+echo "gitdir: ./.bare" > "$NEW_PATH/.git"
+
+git -C "$NEW_PATH" config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+git -C "$NEW_PATH" config worktree.useRelativePaths true
+
+info "Fetching all branches..."
+git -C "$NEW_PATH" fetch --all
+
+# ── add initial worktree ───────────────────────────────────────────────────────
+info "Adding worktree for '$MAIN_BRANCH'"
+git -C "$NEW_PATH" worktree add "$MAIN_BRANCH" "$MAIN_BRANCH"
+
+# ── done ───────────────────────────────────────────────────────────────────────
+echo ""
+echo "✅ Done!"
+echo ""
+echo "  New workspace:  $NEW_PATH"
+echo "  First worktree: $NEW_PATH/$MAIN_BRANCH"
+echo "  Old repo kept:  $OLD_PATH  (delete when happy)"
+echo ""
+echo "Add more worktrees with:"
+echo "  cd $NEW_PATH && git worktree add <branch> <branch>"
+

@@ -16,74 +16,56 @@ return {
                 print_on_error = true,
             },
 
-            --- A new feature that is centered around tags
             completion = {
-                --- Defaults to .cursor/rules
-                -- I am going to disable these until i understand the
-                -- problem better.  Inside of cursor rules there is also
-                -- application rules, which means i need to apply these
-                -- differently
-                -- cursor_rules = "<custom path to cursor rules>"
-
-                --- A list of folders where you have your own SKILL.md
-                --- Expected format:
-                --- /path/to/dir/<skill_name>/SKILL.md
-                ---
-                --- Example:
-                --- Input Path:
-                --- "scratch/custom_rules/"
-                ---
-                --- Output Rules:
-                --- {path = "scratch/custom_rules/vim/SKILL.md", name = "vim"},
-                --- ... the other rules in that dir ...
-                ---
                 custom_rules = {
-                    "scratch/custom_rules/",
+                    "~/work/skills/skills/",
                 },
-
-                --- What autocomplete do you use.  We currently only
-                --- support cmp right now
+                files = {
+                    enabled = true,
+                    max_file_size = 102400,     -- bytes, skip files larger than this
+                    max_files = 5000,            -- cap on total discovered files
+                    exclude = { ".env", ".env.*", "node_modules", ".git" },
+                },
                 source = "cmp",
             },
+            show_in_flight_requests = true,
 
-            --- WARNING: if you change cwd then this is likely broken
-            --- ill likely fix this in a later change
-            ---
+            -- model = "opencode/glm-4.7-free",
+            model = "openai/gpt-5.3-codex",
             --- md_files is a list of files to look for and auto add based on the location
             --- of the originating request.  That means if you are at /foo/bar/baz.lua
             --- the system will automagically look for:
             --- /foo/bar/AGENT.md
             --- /foo/AGENT.md
             --- assuming that /foo is project root (based on cwd)
-            -- model = "opencode/glm-4.7-free",
-            model = "openai/gpt-5.3-codex",
             md_files = {
                 "AGENT.md",
             },
         })
-
-        -- Create your own short cuts for the different types of actions
-        vim.keymap.set("n", "<leader>9f", function()
-            _99.fill_in_function()
+        --- work extension to try out
+        vim.keymap.set("n", "<leader>9wd", function()
+            _99.Extensions.Worker.set_work()
         end)
-        -- take extra note that i have visual selection only in v mode
-        -- technically whatever your last visual selection is, will be used
-        -- so i have this set to visual mode so i dont screw up and use an
-        -- old visual selection
-        --
-        -- likely ill add a mode check and assert on required visual mode
-        -- so just prepare for it now
+
+        vim.keymap.set("n", "<leader>9ww", function()
+            _99.Extensions.Worker.work()
+        end)
+
+        vim.keymap.set("n", "<leader>9wg", function()
+            print(_99.Extensions.Worker.current_work_item)
+        end)
+
         vim.keymap.set("v", "<leader>9v", function()
             _99.visual()
         end)
 
-        vim.keymap.set("v", "<leader>9r", function()
-            _99.visual_prompt()
+        --- if you have a request you dont want to make any changes, just cancel it
+        vim.keymap.set("n", "<leader>9x", function()
+            _99.stop_all_requests()
         end)
 
-        --- if you have a request you dont want to make any changes, just cancel it
-        vim.keymap.set("v", "<leader>9s", function()
-            _99.stop_all_requests()
+        vim.keymap.set("n", "<leader>9s", function()
+            _99.search()
         end)
     end,
 }

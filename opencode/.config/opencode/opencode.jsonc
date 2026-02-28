@@ -1,0 +1,26 @@
+{
+  // right now this is a dummy and not stowed, needs to get moved
+  "$schema": "https://opencode.ai/config.json",
+  "permission": {
+        "skill": {
+          "*": "allow",
+          "pr-review": "allow",
+          "internal-*": "deny",
+          "experimental-*": "ask"
+        }
+  },
+  "provider": {
+    "runpod-public-": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "runpod-pe-qwen",
+      "options": {
+        "baseURL": "https://api.runpod.ai/v2/qwen3-32b-awq/openai/v1"
+      },
+      "models": {
+        "Qwen/Qwen3-32B-AWQ": {
+          "name": "qwen3-32b-awq"
+        }
+      }
+    }
+  }
+}

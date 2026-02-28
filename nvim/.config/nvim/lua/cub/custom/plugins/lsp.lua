@@ -85,6 +85,7 @@ return {
                             }
                         }
                     end,
+
                     ["vtsls"] = function()
                         require("lspconfig").vtsls.setup({
                             capabilities = capabilities,
@@ -93,7 +94,7 @@ return {
                                     autoUseWorkspaceTsdk = true,
                                     tsserver = {
                                         -- disable global plugins first while debugging crashes
-                                        -- globalPlugins = {},
+                                        globalPlugins = {},
                                     },
                                     experimental = {
                                         completion = {

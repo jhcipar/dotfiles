@@ -1,0 +1,12 @@
+gwb() {
+  local base="${2:-origin/$(git symbolic-ref refs/remotes/origin/HEAD | sed 's|refs/remotes/origin/||')}"
+  git worktree add -b "$1" "$base"
+}
+gwr() { git worktree remove "$1" && git branch -d "$1"; }
+gwo() { git worktree add "$1" }
+
+gwcd() {
+  local worktrees=$(git worktree list --porcelain | grep "worktree " | awk '{print $2}')
+  local selected=$(echo "$worktrees" | fzf --height 40% --reverse)
+  [[ -n "$selected" ]] && cd "$selected"
+}
