@@ -119,3 +119,6 @@ source $HOME/dotfiles/secrets.env
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+
+# opencode
+export PATH=/home/jake-cipar/.opencode/bin:$PATH
